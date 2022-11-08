@@ -52,7 +52,7 @@ public class CustomerGUI extends BorderPane{
         
         //Labels
         label1 = new Label("Sun Devil Pizza");
-        label2 = new Label("Pizza Type");
+        label2 = new Label("Pizza Types");
         label3 = new Label("Pizza Toppings");
         label4 = new Label("Pizza Size");
         
