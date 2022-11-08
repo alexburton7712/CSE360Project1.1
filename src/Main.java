@@ -23,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 // this is ASHER will smells
+//Alex was here too
 public class Main extends Application
 {
     @Override
