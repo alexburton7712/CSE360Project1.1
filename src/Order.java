@@ -34,11 +34,8 @@ public class Order {
 			case 2:
 				price += 12;
 			default:
-				price = price;
+				price = 0;
 		}
-		
-		
-		
 		return price;
 	}
 	
