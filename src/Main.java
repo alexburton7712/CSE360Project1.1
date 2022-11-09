@@ -20,20 +20,19 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-
+//Alex was here too
 public class Main extends Application
 {
     private Button swapScreen;
     int screen = 0;
     @Override    
-    //ALEX WAS HERE
     public void start(Stage stage) {       
         Order dummy[] = new Order[3];
         boolean dum[] = new boolean[]{true, false, true, true};
         
-        dummy[0] = new Order(0, 0, dum, 111, "John", "Bill", true);
-        dummy[1] = new Order(1, 0, dum, 123, "Alex", "Frank", false);
-        dummy[2] = new Order(0, 1, dum, 444, "Steve", "Bill", true);
+        dummy[0] = new Order(0, 0, dum, 111, "Alex", "Bill", true);
+        dummy[1] = new Order(1, 0, dum, 123, "Wills", "Frank", false);
+        dummy[2] = new Order(0, 1, dum, 444, "Ashers", "Bill", true);
         
         StackPane rootPane = new StackPane();
         CustomerGUI gui = new CustomerGUI();
@@ -44,6 +43,12 @@ public class Main extends Application
         CookGUI cookGUI = new CookGUI(dummy);
         Scene scene2 = new Scene(secondPane, 630, 540); 
         secondPane.getChildren().add(cookGUI);
+        
+        StackPane thirdPane = new StackPane();
+        cashierUI cashierGUI = new cashierUI();
+        Scene scene3 = new Scene(thirdPane, 630, 540); 
+        thirdPane.getChildren().add(cashierGUI);
+        
         
         swapScreen = new Button("Swap GUI");   
         swapScreen.setTranslateX(270);
@@ -56,22 +61,26 @@ public class Main extends Application
                     screen = 1;
                     rootPane.getChildren().add(swapScreen);
                 }
-                else{
+                else if(screen == 1){
                     stage.setScene(scene2);
-                    screen = 0;
+                    screen = 2;
                     secondPane.getChildren().add(swapScreen);
+                }
+                else if(screen == 2){
+                    stage.setScene(scene3);
+                    screen = 0;
+                    thirdPane.getChildren().add(swapScreen);
                 }
             }
         });
         
         
-        rootPane.getChildren().add(swapScreen);
-        secondPane.getChildren().add(swapScreen);
-        //Setting title to the Stage 
+ 
         stage.setTitle("Pizza GUI"); 
            
-        //Adding scene to the stage 
-        stage.setScene(scene2); 
+        //Adding scene to the stage
+        rootPane.getChildren().add(swapScreen); 
+        stage.setScene(scene); 
         //Displaying the contents of the stage 
         stage.show(); 
         
