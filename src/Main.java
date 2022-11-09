@@ -1,6 +1,4 @@
-/**
- * This Main class is used to test JavaFX.
- */
+
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -50,8 +48,4 @@ public class Main extends Application
     {
         launch(args);
     }//end main
-    //changes
-    
-    
-    
 }

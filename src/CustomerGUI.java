@@ -97,7 +97,7 @@ public class CustomerGUI extends BorderPane{
         checkBox4 = new CheckBox("Extra Cheese");
         
         //Creating Buttons 
-        button1 = new Button("Create Order"); 
+        button1 = new Button("Add to Order"); 
 
         
         //vbox to hold the order screen
@@ -204,8 +204,7 @@ public class CustomerGUI extends BorderPane{
             }
             
             Pizza pizza = new Pizza(pizzaType, size, toppings);
-            
-            System.out.println(pizza.toString());
+
         }
     }//end PizzaTypeHandeler
     
