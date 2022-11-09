@@ -13,7 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-//I hate my time spent here
+//I really hate my time spent here
 public class CustomerGUI extends BorderPane{
     
     //instance variabels
