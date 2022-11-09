@@ -20,12 +20,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-//Alex was here too
+
 public class Main extends Application
 {
     private Button swapScreen;
     int screen = 0;
     @Override    
+    //ALEX WAS HERE
     public void start(Stage stage) {       
         Order dummy[] = new Order[3];
         boolean dum[] = new boolean[]{true, false, true, true};

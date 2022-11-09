@@ -1,7 +1,9 @@
 /CookGUI.class
 /CustomerGUI$ButtonHandler.class
 /CustomerGUI.class
+/Main$1.class
 /Main.class
 /Order.class
 /Pizza.class
-/LoginGUI.class
+/cashierUI$ButtonHandler.class
+/cashierUI.class
