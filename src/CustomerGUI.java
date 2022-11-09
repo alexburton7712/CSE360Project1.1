@@ -44,8 +44,8 @@ public class CustomerGUI extends BorderPane{
     
     private Button button1;
     
-    Image pizza;
-    ImageView pizzaWindow;
+    //Image pizza;
+    //ImageView pizzaWindow;
     
     public CustomerGUI() {
         
@@ -55,12 +55,14 @@ public class CustomerGUI extends BorderPane{
         label3 = new Label("Pizza Toppings");
         label4 = new Label("Pizza Size");
         
+        /**
         pizza = new Image("pizza.png");
         pizzaWindow = new ImageView(pizza);
         pizzaWindow.setLayoutX(2);
         pizzaWindow.setLayoutY(2);
         pizzaWindow.setFitWidth(145);  
         pizzaWindow.setFitHeight(145);
+        **/
         
         //radio buttons to select pizza type
         group = new ToggleGroup();
@@ -130,7 +132,7 @@ public class CustomerGUI extends BorderPane{
         vBox1.getChildren().add(label4);
         vBox1.getChildren().add(vBox4);
         vBox1.getChildren().add(button1);
-        vBox1.getChildren().add(pizzaWindow);
+        //vBox1.getChildren().add(pizzaWindow);
 
         Insets inset = new Insets(25);
         vBox1.setPadding(inset);
@@ -203,8 +205,7 @@ public class CustomerGUI extends BorderPane{
             
             Pizza pizza = new Pizza(pizzaType, size, toppings);
             
-            System.out.println(pizza.getType());
-            System.out.println(pizza.getSize());
+            System.out.println(pizza.toString());
         }
     }//end PizzaTypeHandeler
     

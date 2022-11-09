@@ -42,4 +42,61 @@ public class Pizza {
 		this.size = size;
 	}
 	
+	public String toString() {
+		String pizza = "This pizza is a ";
+		
+		switch(size) {
+			case 0:
+				pizza += "small ";
+				break;
+			case 1:
+				pizza += "medium ";
+				break;
+			case 2:
+				pizza += "large ";
+				break;
+			default:
+				pizza += "";
+				break;
+		}
+		
+		switch(type) {
+			case 0:
+				pizza += "cheese pizza ";
+				break;
+			case 1:
+				pizza += "pepperoni pizza ";
+				break;
+			case 2:
+				pizza += "vegetable pizza ";
+				break;
+			default:
+				pizza += "";
+				break;
+		}
+		
+		if(!toppings[0] && !toppings[1] && !toppings[2] && !toppings[3]) {
+			pizza += "with no toppings.";
+		}
+		else {
+			
+			pizza += "with ";
+			
+			if(toppings[0]) {
+				pizza += "mushrooms ";
+			}
+			if(toppings[1]) {
+				pizza += "onions ";
+			}
+			if(toppings[2]) {
+				pizza += "olives ";
+			}
+			if(toppings[3]) {
+				pizza += "extra cheese ";
+			}
+		}
+		
+		return pizza;
+	}
+	
 }
