@@ -13,7 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
+//I hate my time spent here
 public class CustomerGUI extends BorderPane{
     
     //instance variabels
@@ -202,7 +202,7 @@ public class CustomerGUI extends BorderPane{
             }
             
             Pizza pizza = new Pizza(pizzaType, size, toppings);
-            //This needs to be taken out in the final project
+            
             System.out.println(pizza.getType());
             System.out.println(pizza.getSize());
         }
