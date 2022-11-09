@@ -202,7 +202,7 @@ public class CustomerGUI extends BorderPane{
             }
             
             Pizza pizza = new Pizza(pizzaType, size, toppings);
-            
+            //This needs to be taken out in the final project
             System.out.println(pizza.getType());
             System.out.println(pizza.getSize());
         }
