@@ -40,6 +40,8 @@ public class cashierUI extends BorderPane{
     Image pizza;
     ImageView pizzaWindow;
     
+    
+    
     public cashierUI() {
         //variable new
         //vbox

@@ -205,6 +205,9 @@ public class CustomerGUI extends BorderPane{
             
             Pizza pizza = new Pizza(pizzaType, size, toppings);
 
+            
+            System.out.println();
+            
         }
     }//end PizzaTypeHandeler
     
