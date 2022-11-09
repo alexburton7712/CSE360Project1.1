@@ -1,7 +1,7 @@
 
 public class Order {
 	
-	private Pizza pizza;
+	private Pizza[] pizza;
 	// state can be 0-6: ACCEPTED, REJECTED, READY TO COOK, COOKING: ASSEMBLY, 
 	//COOKING: BAKING, READY, COMPLETE
 	private int state;
@@ -12,13 +12,11 @@ public class Order {
 	private boolean discount;
 	private double price;
 	
-	public Order(int type, int size, boolean[] toppings, int id, String firstName, String lastName, boolean discount) {
-		this.pizza = new Pizza(type, size, toppings);
+	public Order(int id, String firstName, String lastName, boolean discount) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.discount = discount;
-		this.price = calculatePrice();
 	}
 	
 	
@@ -26,15 +24,17 @@ public class Order {
 	public double calculatePrice() {
 		int price = 0;
 		
-		switch(this.pizza.getSize()) {
-			case 0:
-				price += 8;
-			case 1:
-				price += 10;
-			case 2:
-				price += 12;
-			default:
-				price = 0;
+		for(int i = 0; i < pizza.length; i++) {
+			switch(this.pizza[i].getSize()) {
+				case 0:
+					price += 8;
+				case 1:
+					price += 10;
+				case 2:
+					price += 12;
+				default:
+					price = 0;
+			}
 		}
 		return price;
 	}
@@ -48,8 +48,9 @@ public class Order {
 	public int getState() {
 		return state;
 	}
-	public Pizza getPizza() {
-		return pizza;
+	//TODO update pizza getter
+	public Pizza[] getPizza() {
+		return this.pizza;
 	}
 	
 	public int getId() {
@@ -76,9 +77,8 @@ public class Order {
 	public void setState(int state) {
 		this.state = state;
 	}
-	public void setPizza(Pizza pizza) {
-		this.pizza = pizza;
-	}
+	
+	//TODO make pizza[] setter
 
 	public void setId(int id) {
 		this.id = id;
