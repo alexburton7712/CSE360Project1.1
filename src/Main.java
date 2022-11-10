@@ -49,10 +49,10 @@ public class Main extends Application
         Scene scene3 = new Scene(thirdPane, 630, 540); 
         thirdPane.getChildren().add(cashierGUI);
         
-        StackPane fourthPane = new StackPane();
-        LoginGUI loginGUI = new LoginGUI();
-        Scene scene4 = new Scene(thirdPane, 630, 540); 
-        thirdPane.getChildren().add(loginGUI);
+        //StackPane fourthPane = new StackPane();
+        //LoginGUI loginGUI = new LoginGUI();
+        //Scene scene4 = new Scene(thirdPane, 630, 540); 
+        //thirdPane.getChildren().add(loginGUI);
         
         
         swapScreen = new Button("Swap GUI");   
@@ -73,14 +73,14 @@ public class Main extends Application
                 }
                 else if(screen == 2){
                     stage.setScene(scene3);
-                    screen = 3;
+                    screen = 0;
                     thirdPane.getChildren().add(swapScreen);
                 }
-                else if(screen == 3) {
-                	stage.setScene(scene4);
-                    screen = 0;
-                    fourthPane.getChildren().add(swapScreen);
-                }
+                //else if(screen == 3) {
+                //	stage.setScene(scene4);
+                //    screen = 0;
+                //    fourthPane.getChildren().add(swapScreen);
+                //}
             }
         });
         
