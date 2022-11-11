@@ -1,6 +1,5 @@
 package src;
 
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -17,6 +16,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.TextField;
 import java.util.Arrays;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import java.util.ArrayList;
+
 
 public class CustomerGUI extends BorderPane{
     
@@ -25,6 +28,7 @@ public class CustomerGUI extends BorderPane{
     private Label label2;
     private Label label3;
     private Label label4;
+    private Label label5;
     
     private ToggleGroup group;
     private RadioButton rb1;
@@ -45,25 +49,36 @@ public class CustomerGUI extends BorderPane{
     private VBox vBox2;
     private VBox vBox3;
     private VBox vBox4;
-    //for the user input
-    private VBox vBox5;
+    private VBox vBox5;//for the user input
+    
+    private HBox hBox1;//for the two bottom buttons create/add to order
+    private HBox nameHB;
+    private HBox idHB;
     
     //create textboxes
     private TextField nameTextField;
     private TextField idTextField;
     
     private Button button1;
+    private Button button2;
+    
+    //**************************will change for testing*****************
+    private ArrayList<Pizza> pizzaList;
+    //*****************************************************************
     
     //Image pizza;
     //ImageView pizzaWindow;
     
     public CustomerGUI() {
         
+        pizzaList = new ArrayList<>();
+        
         //Labels
         label1 = new Label("Sun Devil Pizza");
         label2 = new Label("Pizza Types");
         label3 = new Label("Pizza Toppings");
         label4 = new Label("Pizza Size");
+        label5 = new Label("Information");
         
         
         /**
@@ -114,26 +129,24 @@ public class CustomerGUI extends BorderPane{
 
         Label idBoxLabel = new Label("ASU ID for Order:");
         TextField idTextField = new TextField();
-        idTextField.setPromptText("0101010101");
+        idTextField.setPromptText("0000000000");
 
         
         //Creating Buttons 
         button1 = new Button("Add to Order"); 
+        button2 = new Button("Complete Order");
 
         
         //vbox to hold the order screen
         vBox1 = new VBox();
-        
         vBox2 = new VBox();
-        
         vBox3 = new VBox();
-        
         vBox4 = new VBox();
-        
         vBox5 = new VBox(); //user input
-        //Hbox to collect name for order
-        HBox nameHB = new HBox();
-        HBox idHB = new HBox();
+        
+        hBox1 = new HBox();
+        nameHB = new HBox();//Hbox to collect name for order
+        idHB = new HBox();//Hbox to collect name for order
         
         //add all the components to the vboxes
         vBox2.getChildren().add(rb1);
@@ -156,14 +169,25 @@ public class CustomerGUI extends BorderPane{
         vBox1.getChildren().add(vBox3);
         vBox1.getChildren().add(label4);
         vBox1.getChildren().add(vBox4);
+        
+        //lebel for information box
+        vBox1.getChildren().add(label5);
+        
         vBox1.getChildren().add(vBox5);
-        vBox1.getChildren().add(button1);
+        
+        //groups the bottom two buttons
+        hBox1.getChildren().add(button1);
+        hBox1.getChildren().add(button2);
+        hBox1.setSpacing(17);
+        vBox1.getChildren().add(hBox1);
+
         
         //vBox1.getChildren().add(pizzaWindow);
         
         vBox5.getChildren().add(nameHB);
         vBox5.getChildren().add(idHB);
         nameHB.getChildren().addAll(nameBoxLabel, nameTextField);
+        
         nameHB.setSpacing(10);
         idHB.getChildren().addAll(idBoxLabel, idTextField);
         idHB.setSpacing(10);
@@ -188,28 +212,28 @@ public class CustomerGUI extends BorderPane{
         vBox5.setStyle("-fx-border-color: black");
         
         this.setCenter(vBox1);
-        button1.setOnAction(new ButtonHandler());
+        button1.setOnAction(new orderCreater());
+        button2.setOnAction(new PizzaHandler());
     }
     
-    private class ButtonHandler implements EventHandler<ActionEvent>
-    {
-        public void handle(ActionEvent event)
-        {
-            
+    //adds pizza to the pizza list
+    //adds pizza to order (order creates order)
+    private class PizzaHandler implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent event) {
             int pizzaType = -1;
-            //cheese pizza selected
+                    //cheese pizza selected
             if(rb1.isSelected()) {
                 pizzaType = 0;
             }
-            //pepperoni pizza
+               //pepperoni pizza
             else if(rb2.isSelected()) {
                 pizzaType = 1;
             }
-            //vegetable pizza
+                //vegetable pizza
             else {
                 pizzaType = 2;
             }
-            
+                    
             //size of the pizza
             int size = -1;
             if(rb4.isSelected()) {
@@ -223,9 +247,9 @@ public class CustomerGUI extends BorderPane{
             else {
                 size = 2;
             }
-            
+                
             boolean[] toppings = new boolean[4];
-            
+                    
             if(checkBox1.isSelected()) {
                 toppings[0] = true;
             }
@@ -238,67 +262,54 @@ public class CustomerGUI extends BorderPane{
             if(checkBox4.isSelected()) {
                 toppings[3] = true;
             }
-                        
-            //get the id string and check if its all integers
-            boolean validOrder = true;
-            boolean validId = true;
-            boolean discount = false;
-            /*
-            System.out.println("PRINT STATEMENT BEFORE THINGS CRASH");
-            //name input
-            String name = nameTextField.getText();
-            String firstName = "";
-            String lastName = "";
-            char[] nameChars = name.toCharArray();
-            //loop through the name input to isolate the first and last names
-            for(int i = 0; i<nameChars.length;i++){
-                if (nameChars[i] == ' '){
-                    //seperate the first name
-                    char[] firstNameChar = Arrays.copyOfRange(nameChars,0,i-1);
-                    firstName = String.valueOf(firstNameChar);
-                    System.out.println(firstName);
-                    //seperate the last name
-                    char[] lastNameChar = Arrays.copyOfRange(nameChars,i+1,nameChars.length);
-                    lastName = String.valueOf(lastNameChar);
-                    System.out.println(lastName);
-                }
-            }
-            
-            //Id check
-            
-            String idString = idTextField.getText();
-            char[] idChars = idString.toCharArray();
-            for(int i = 0; i<idChars.length;i++){
-                if ((idChars[i] != 0)&&(idChars[i] != 1)&&(idChars[i] != 2)&&
-                    (idChars[i] != 3)&&(idChars[i] != 4)&&(idChars[i] != 5)&&
-                    (idChars[i] != 6)&&(idChars[i] != 7)&&(idChars[i] != 8)&&
-                    (idChars[i] != 9)){
-                    validId = false;
-                }
-                if (i > 9){
-                    validId = false;
-                }
-            }
-            //parse the id input to a int
-            int id = 0;
-            if (validId){
-                id =  Integer.parseInt(idTextField.getText());
-            }
-            System.out.println(id);
-            */
-            
-            if (validId){
-                discount = true;
-                Order newOrder = new Order(pizzaType, size, toppings, /*id*/0000000000, /*firstName*/"firstName", /*lastName*/"lastName", discount);
-            } else{
-                Order newOrder = new Order(pizzaType, size, toppings, 0000000000, /*firstName*/"firstName", /*lastName*/"lastName", discount);
-            }
-
+                            
+        
             Pizza pizza = new Pizza(pizzaType, size, toppings);
-            
-            System.out.println();
-            
+            pizzaList.add(pizza);
         }
+    }
+    
+    //this creates the order
+    private class orderCreater implements EventHandler<ActionEvent>
+    {
+        public void handle(ActionEvent event)
+        {
+            try {
+                //if it wont crash and will convert to string
+                int correctID;
+                
+                //creates pizza array list
+                
+                //read from memory and get the last order stored and add one
+                //to that ordernumber 
+                //If there is no orders in memory, start at 1 again
+                int orderNum = 0;
+                
+                //if this does not work then it throws the error
+                if(!idTextField.getText().equals("")) {
+                    correctID = Integer.parseInt(idTextField.getText());   
+                } else {
+                    correctID = 0;
+                }
+                
+                //runs if it is namefiled is not empty
+                if(!nameTextField.getText().equals("")) {
+                    
+                }
+            }
+            catch (NumberFormatException ex){
+                invalidID("Invalid ID", "Please enter a valid ASU id", "Error");
+            }
+        }
+        
+    //(error, message, title)
+    private static void invalidID(String error, String message, String title) {
+        Alert al = new Alert(AlertType.ERROR);
+        al.setTitle(title);
+        al.setHeaderText(error);
+        al.setContentText(message);
+        al.showAndWait();
+    }
     }//end PizzaTypeHandeler
     
 }

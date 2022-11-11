@@ -1,3 +1,5 @@
+package src;
+
 
 public class Pizza {
 	//0 = cheese, 1 = pepperoni, 2 = vegetable

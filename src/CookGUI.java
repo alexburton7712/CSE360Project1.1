@@ -1,3 +1,5 @@
+package src;
+
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,6 +13,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import java.util.ArrayList;
 
 public class CookGUI extends BorderPane{
     
@@ -18,18 +21,36 @@ public class CookGUI extends BorderPane{
     private Button cookButton;
     private Button customerButton;
     private VBox outer;
+    private ArrayList<Order> pizzaList;
     
     public CookGUI(Order [] orders) {
         outer = new VBox();
+        pizzaList = new ArrayList<>();
         
         title = new Label("Order");
         outer.getChildren().addAll(title);
+        
+        /*
         for(int i = 0; i < orders.length; i++)
         {
             Order order = orders[i];
             orderNum = new Label("Order number" + order.getID());
-            outer.getChildren().addAll(orderNum,order);
-        }      
+            //outer.getChildren().addAll(orderNum,order);
+            outer.getChildren().addAll(orderNum);
+        }*/    
+        
+        for(int i = 0; i < pizzaList.size(); i++) {
+            int size = pizzaList.get(i).getPizzaList().size();
+            for(int j = 0; j < size; j++) {
+                outer.getChildren().add(
+                new VBox(
+                    new Label(
+                        pizzaList.get(i).getPizzaList().get(j).toString()
+                        )
+                    )
+                );
+            }
+        }
         
         
         

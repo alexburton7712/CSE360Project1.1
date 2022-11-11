@@ -1,12 +1,20 @@
+package src;
+
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
 import javafx.geometry.Insets;
-public class Order extends HBox{
+import java.util.ArrayList;
+
+//public class Order extends HBox{
+public class Order {
     
     private Pizza pizza;
+    
+    private ArrayList<Pizza> pizzaList;
     // state can be 0-6: ACCEPTED, REJECTED, READY TO COOK, COOKING: ASSEMBLY, 
     //COOKING: BAKING, READY, COMPLETE
     private int state;
+    //private orderNum;
     //id = 0 means not ASU student and no discount
     private int id;
     private String firstName;
@@ -20,14 +28,16 @@ public class Order extends HBox{
         this.firstName = firstName;
         this.lastName = lastName;
         this.discount = discount;
-        this.price = calculatePrice(); 
+        this.price = calculatePrice();
         
+        /*
         Insets inset = new Insets(25);
         this.setPadding(inset);
         this.setStyle("-fx-border-color: black");
         
         name = new Label("Name: "+ firstName + " " + lastName);
         this.getChildren().addAll(name);
+        */
     }
     
     
@@ -81,6 +91,10 @@ public class Order extends HBox{
         return price;
     }
     
+    public ArrayList<Pizza> getPizzaList() {
+        return pizzaList;
+    }
+    
     //setters
     public void setState(int state) {
         this.state = state;
@@ -108,5 +122,4 @@ public class Order extends HBox{
     public void setPrice(double price) {
         this.price = price;
     }
-    
 }
