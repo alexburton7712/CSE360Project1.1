@@ -34,26 +34,26 @@ public class Main extends Application
     
     @Override    
     public void start(Stage stage) {       
-        Order dummy[] = new Order[3];
-        boolean dum[] = new boolean[]{true, false, true, true};
+        //Order dummy[] = new Order[3];
+        //boolean dum[] = new boolean[]{true, false, true, true};
         
-        dummy[0] = new Order(0, 0, dum, 111, "Alex", "Bill", true);
-        dummy[1] = new Order(1, 0, dum, 123, "Wills", "Frank", false);
-        dummy[2] = new Order(0, 1, dum, 444, "Ashers", "Bill", true);
+        //dummy[0] = new Order(0, 0, dum, 111, "Alex", "Bill", true);
+        //dummy[1] = new Order(1, 0, dum, 123, "Wills", "Frank", false);
+        //dummy[2] = new Order(0, 1, dum, 444, "Ashers", "Bill", true);
         
         screen = 0;
         
         orderList = new ArrayList<>();
         
         StackPane rootPane = new StackPane();
-        CustomerGUI gui = new CustomerGUI();
+        CustomerGUI gui = new CustomerGUI(orderList);
         Scene scene = new Scene(rootPane, 630, 540);
         rootPane.getChildren().add(gui);
         
         StackPane secondPane = new StackPane();
-        CookGUI cookGUI = new CookGUI(dummy);
+        //CookGUI cookGUI = new CookGUI(dummy);
         Scene scene2 = new Scene(secondPane, 630, 540); 
-        secondPane.getChildren().add(cookGUI);
+        //secondPane.getChildren().add(cookGUI);
         
         StackPane thirdPane = new StackPane();
         cashierUI cashierGUI = new cashierUI();

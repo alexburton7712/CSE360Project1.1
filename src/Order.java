@@ -17,43 +17,44 @@ public class Order {
     //private orderNum;
     //id = 0 means not ASU student and no discount
     private int id;
-    private String firstName;
-    private String lastName;
+    private String name;
     private boolean discount;
     private double price;
-    private Label name;
-    public Order(int type, int size, boolean[] toppings, int id, String firstName, String lastName, boolean discount) {
-        this.pizza = new Pizza(type, size, toppings);
+    private int orderNum;
+    
+    public Order(ArrayList<Pizza> pizzaList, int id, String name, boolean discount) {
+        this.pizzaList = pizzaList;
+        
+        
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
         this.discount = discount;
         this.price = calculatePrice();
+        this.state = 0;
         
-        /*
-        Insets inset = new Insets(25);
-        this.setPadding(inset);
-        this.setStyle("-fx-border-color: black");
+        this.orderNum = 0;
         
-        name = new Label("Name: "+ firstName + " " + lastName);
-        this.getChildren().addAll(name);
-        */
     }
     
     
     //calculates price for the order
     public double calculatePrice() {
-        int price = 0;
-        
-        switch(this.pizza.getSize()) {
-            case 0:
-                price += 8;
-            case 1:
-                price += 10;
-            case 2:
-                price += 12;
-            default:
-                price = 0;
+        double price = 0;
+        for(int i = 0; i < this.pizzaList.size(); i++) {
+            switch(pizzaList.get(i).getSize()) {
+                case 0:
+                    this.price += 8;
+                case 1:
+                    this.price += 10;
+                case 2:
+                    this.price += 12;
+                default:
+                    this.price = price;
+            }
+        }
+        //25% off
+        if(discount) {
+            price = price * 0.75;
         }
         return price;
     }
@@ -75,12 +76,8 @@ public class Order {
         return id;
     }
     
-    public String getFirstName() {
-        return firstName;
-    }
-    
-    public String getLastName() {
-        return lastName;
+    public String getName() {
+        return name;
     }
     
     public boolean isDiscount() {
@@ -95,6 +92,10 @@ public class Order {
         return pizzaList;
     }
     
+    public int getOrderNum() {
+        return orderNum;
+    }
+    
     //setters
     public void setState(int state) {
         this.state = state;
@@ -107,12 +108,8 @@ public class Order {
         this.id = id;
     }
     
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    
-    public void setLastName(String lastName) {
-        this.lastName =lastName;
+    public void setName(String name) {
+        this.name = name;
     }
     
     public void setDiscount(boolean discount) {

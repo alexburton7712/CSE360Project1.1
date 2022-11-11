@@ -62,6 +62,9 @@ public class CustomerGUI extends BorderPane{
     private Button button1;
     private Button button2;
     
+    //creates the order list
+    private ArrayList<Order> orderList;
+    
     //**************************will change for testing*****************
     private ArrayList<Pizza> pizzaList;
     //*****************************************************************
@@ -69,9 +72,10 @@ public class CustomerGUI extends BorderPane{
     //Image pizza;
     //ImageView pizzaWindow;
     
-    public CustomerGUI() {
+    public CustomerGUI(ArrayList<Order> orderList) {
         
         pizzaList = new ArrayList<>();
+        this.orderList = orderList;
         
         //Labels
         label1 = new Label("Sun Devil Pizza");
@@ -277,7 +281,7 @@ public class CustomerGUI extends BorderPane{
             try {
                 //if it wont crash and will convert to string
                 int correctID;
-                
+                boolean discount = false;
                 //creates pizza array list
                 
                 //read from memory and get the last order stored and add one
@@ -285,7 +289,11 @@ public class CustomerGUI extends BorderPane{
                 //If there is no orders in memory, start at 1 again
                 int orderNum = 0;
                 
-                
+                if(orderList.size() == 0) {
+                    orderNum = 1;
+                } else {
+                    orderList.get(orderList.size()-1).getOrderNum();
+                }
                 
                 //if this does not work then it throws the error
                 if(!idTextField.getText().equals("")) {
@@ -293,15 +301,35 @@ public class CustomerGUI extends BorderPane{
                 } else {
                     correctID = 0;
                 }
-                
+                String name = "";
                 //runs if it is namefiled is not empty
                 if(!nameTextField.getText().equals("")) {
-                    
+                    name = nameTextField.getText();
+                } else {
+                    invalidID("No Name", "Please enter a name", "Error");
                 }
+                
+                if(correctID != 0) {
+                    discount = true;
+                }
+                
+                Order order = new Order(pizzaList, correctID, name, discount);
+                
+                orderList.add(order);
+                
+                System.out.println("the try was not cought");
             }
             catch (NumberFormatException ex){
                 invalidID("Invalid ID", "Please enter a valid ASU id", "Error");
+                System.out.println("the try catch was cought");
             }
+            
+            //for testing**************************
+            
+            for(int i = 0; i < orderList.size(); i++) {
+                //System.out.println(orderList().get(i).getName());
+            }
+            //print orderList(i) see if the details are right
         }
         
     //(error, message, title)
