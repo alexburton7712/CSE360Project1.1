@@ -22,11 +22,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import java.util.ArrayList;
+
 //Alex was here too
 public class Main extends Application
 {
     private Button swapScreen;
-    int screen = 0;
+    private int screen;
+    private ArrayList<Order> orderList;
+    
+    
     @Override    
     public void start(Stage stage) {       
         Order dummy[] = new Order[3];
@@ -35,6 +40,10 @@ public class Main extends Application
         dummy[0] = new Order(0, 0, dum, 111, "Alex", "Bill", true);
         dummy[1] = new Order(1, 0, dum, 123, "Wills", "Frank", false);
         dummy[2] = new Order(0, 1, dum, 444, "Ashers", "Bill", true);
+        
+        screen = 0;
+        
+        orderList = new ArrayList<>();
         
         StackPane rootPane = new StackPane();
         CustomerGUI gui = new CustomerGUI();
@@ -79,7 +88,7 @@ public class Main extends Application
                     thirdPane.getChildren().add(swapScreen);
                 }
                 //else if(screen == 3) {
-                //	stage.setScene(scene4);
+                //    stage.setScene(scene4);
                 //    screen = 0;
                 //    fourthPane.getChildren().add(swapScreen);
                 //}

@@ -81,7 +81,7 @@ public class CustomerGUI extends BorderPane{
         label5 = new Label("Information");
         
         
-        /**
+        /** pizza image
         pizza = new Image("pizza.png");
         pizzaWindow = new ImageView(pizza);
         pizzaWindow.setLayoutX(2);
@@ -284,6 +284,8 @@ public class CustomerGUI extends BorderPane{
                 //to that ordernumber 
                 //If there is no orders in memory, start at 1 again
                 int orderNum = 0;
+                
+                
                 
                 //if this does not work then it throws the error
                 if(!idTextField.getText().equals("")) {
