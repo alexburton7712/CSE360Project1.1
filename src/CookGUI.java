@@ -1,4 +1,4 @@
-package src;
+ 
 
 
 import javafx.event.ActionEvent;
@@ -23,7 +23,7 @@ public class CookGUI extends BorderPane{
     private VBox outer;
     private ArrayList<Order> pizzaList;
     
-    public CookGUI(Order [] orders) {
+    public CookGUI(ArrayList<Order> orderList) {
         outer = new VBox();
         pizzaList = new ArrayList<>();
         
