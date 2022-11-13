@@ -1,4 +1,4 @@
-package src;
+ 
 
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
@@ -18,17 +18,18 @@ public class Order {
     //id = 0 means not ASU student and no discount
     private int id;
     private String name;
-    private boolean discount;
+    private boolean discount = false;
     private double price;
     private int orderNum;
     
-    public Order(ArrayList<Pizza> pizzaList, int id, String name, boolean discount) {
+    public Order(ArrayList<Pizza> pizzaList, int id, String name) {
         this.pizzaList = pizzaList;
         
         
         this.id = id;
         this.name = name;
-        this.discount = discount;
+        if (id != 0)
+            discount = true;
         this.price = calculatePrice();
         this.state = 0;
         
