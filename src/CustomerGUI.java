@@ -1,4 +1,4 @@
-package src;
+ 
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -216,8 +216,68 @@ public class CustomerGUI extends BorderPane{
         vBox5.setStyle("-fx-border-color: black");
         
         this.setCenter(vBox1);
-        button1.setOnAction(new orderCreater());
-        button2.setOnAction(new PizzaHandler());
+        button1.setOnAction(new PizzaHandler());
+        //button2.setOnAction(new orderCreater());
+        
+        
+        button2.setOnAction(new EventHandler<ActionEvent>(){
+            public void handle(ActionEvent event)
+            {
+            try {
+                //if it wont crash and will convert to string
+                int correctID;
+                //creates pizza array list
+                //read from memory and get the last order stored and add one
+                //to that ordernumber 
+                //If there is no orders in memory, start at 1 again
+                int orderNum = 0;
+                
+                if(orderList.size() == 0) {
+                    orderNum = 1;
+                } else {
+                    orderNum = orderList.get(orderList.size()-1).getOrderNum() + 1;
+                }
+                //if this does not work then it throws the error
+                if(!idTextField.getText().equals("")) {
+                    correctID = Integer.parseInt(idTextField.getText());   
+                } else {
+                    correctID = 0;
+                }
+                String name = "";
+                //runs if it is namefiled is not empty
+                if(!nameTextField.getText().equals("")) {
+                    name = nameTextField.getText();
+                } else {
+                    invalidID("No Name", "Please enter a name", "Error");
+                }
+                Order order = new Order(pizzaList, correctID, name);
+                
+                orderList.add(order);
+                
+                System.out.println("the try was not cought");
+            }
+            catch (NumberFormatException ex){
+                //invalidID("Invalid ID", "Please enter a valid ASU id", "Error");
+                System.out.println("the try catch was cought");
+            }
+            
+            for(int i = 0; i < orderList.size(); i++) {
+                //System.out.println(orderList().get(i).getName());
+            }
+            //print orderList(i) see if the details are right
+        }
+        
+    //(error, message, title)
+    private static void invalidID(String error, String message, String title) {
+        Alert al = new Alert(AlertType.ERROR);
+        al.setTitle(title);
+        al.setHeaderText(error);
+        al.setContentText(message);
+        al.showAndWait();
+    }      
+        });
+        
+        
     }
     
     //adds pizza to the pizza list
@@ -274,72 +334,5 @@ public class CustomerGUI extends BorderPane{
     }
     
     //this creates the order
-    private class orderCreater implements EventHandler<ActionEvent>
-    {
-        public void handle(ActionEvent event)
-        {
-            try {
-                //if it wont crash and will convert to string
-                int correctID;
-                boolean discount = false;
-                //creates pizza array list
-                
-                //read from memory and get the last order stored and add one
-                //to that ordernumber 
-                //If there is no orders in memory, start at 1 again
-                int orderNum = 0;
-                
-                if(orderList.size() == 0) {
-                    orderNum = 1;
-                } else {
-                    orderList.get(orderList.size()-1).getOrderNum();
-                }
-                
-                //if this does not work then it throws the error
-                if(!idTextField.getText().equals("")) {
-                    correctID = Integer.parseInt(idTextField.getText());   
-                } else {
-                    correctID = 0;
-                }
-                String name = "";
-                //runs if it is namefiled is not empty
-                if(!nameTextField.getText().equals("")) {
-                    name = nameTextField.getText();
-                } else {
-                    invalidID("No Name", "Please enter a name", "Error");
-                }
-                
-                if(correctID != 0) {
-                    discount = true;
-                }
-                
-                Order order = new Order(pizzaList, correctID, name, discount);
-                
-                orderList.add(order);
-                
-                System.out.println("the try was not cought");
-            }
-            catch (NumberFormatException ex){
-                invalidID("Invalid ID", "Please enter a valid ASU id", "Error");
-                System.out.println("the try catch was cought");
-            }
-            
-            //for testing**************************
-            
-            for(int i = 0; i < orderList.size(); i++) {
-                //System.out.println(orderList().get(i).getName());
-            }
-            //print orderList(i) see if the details are right
-        }
-        
-    //(error, message, title)
-    private static void invalidID(String error, String message, String title) {
-        Alert al = new Alert(AlertType.ERROR);
-        al.setTitle(title);
-        al.setHeaderText(error);
-        al.setContentText(message);
-        al.showAndWait();
-    }
-    }//end PizzaTypeHandeler
     
 }
