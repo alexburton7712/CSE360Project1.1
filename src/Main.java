@@ -133,9 +133,9 @@ public class Main extends Application
         rootPane.getChildren().add(gui);
         
         StackPane secondPane = new StackPane();
-        //CookGUI cookGUI = new CookGUI(dummy);
+        CookGUI cookGUI = new CookGUI(orderList);
         Scene scene2 = new Scene(secondPane, 630, 540); 
-        //secondPane.getChildren().add(cookGUI);
+        secondPane.getChildren().add(cookGUI);
         
         StackPane thirdPane = new StackPane();
         cashierUI cashierGUI = new cashierUI();
