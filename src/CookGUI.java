@@ -30,28 +30,22 @@ public class CookGUI extends BorderPane{
         title = new Label("Order");
         outer.getChildren().addAll(title);
         
-        /*
-        for(int i = 0; i < orders.length; i++)
+        for(int i = 0; i < orderList.size(); i++)
         {
-            Order order = orders[i];
-            orderNum = new Label("Order number" + order.getID());
-            //outer.getChildren().addAll(orderNum,order);
-            outer.getChildren().addAll(orderNum);
-        }*/    
-        
-        for(int i = 0; i < pizzaList.size(); i++) {
-            int size = pizzaList.get(i).getPizzaList().size();
-            for(int j = 0; j < size; j++) {
-                outer.getChildren().add(
-                new VBox(
-                    new Label(
-                        pizzaList.get(i).getPizzaList().get(j).toString()
-                        )
-                    )
-                );
+            Order tempOrder = orderList.get(i);
+            for(int j = 0; j < tempOrder.getPizzaList().size(); j++)
+            {
+                Pizza tempPizza = tempOrder.getPizzaList().get(j);
+                VBox cookOrder = new VBox();
+                Label orderName = new Label(tempOrder.getName() + "\n" + tempOrder.getOrderNum() + "\n" + tempPizza.getSize() +"\n" + tempPizza.getType());
+                cookOrder.getChildren().addAll(orderName);
+                outer.getChildren().addAll(cookOrder);
+                cookOrder.setStyle("-fx-border-color: black");
+                Insets inset = new Insets(25);
+                cookOrder.setPadding(inset);                
+                cookOrder.setMargin(outer, new Insets(0, 0, 0, 8));
             }
-        }
-        
+        }       
         
         
         Insets inset = new Insets(25);
