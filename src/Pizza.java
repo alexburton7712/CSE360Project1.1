@@ -1,6 +1,3 @@
- 
-
-
 public class Pizza {
     //0 = cheese, 1 = pepperoni, 2 = vegetable
     private int type;
@@ -9,17 +6,22 @@ public class Pizza {
     //array of strings to hold the toppings on the pizza
     //0 = mushrooms, 1 = onions, 2 = olives, 3 = extra Cheese
     private boolean[] toppings;
-    
+    private int state;
     //constructor
-    public Pizza(int type, int size, boolean[] toppings) {
+    public Pizza(int type, int size, boolean[] toppings, int state) {
         this.type = type;
         this.size = size;
         this.toppings = toppings;
+        this.state = state;
     }    
 
     //getters
     public int getType() {
         return type;
+    }
+    
+    public int getState() {
+        return state;
     }
     
     public int getSize() {
@@ -34,6 +36,10 @@ public class Pizza {
     //setters
     public void setToppings(int index) {
         toppings[index] = !toppings[index];
+    }
+    
+    public void setState(int state) {
+        this.state = state;
     }
 
     public void setType(int type) {
