@@ -1,5 +1,3 @@
- 
-
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -38,23 +36,37 @@ public class Main extends Application
     @Override    
     public void start(Stage stage) {       
         
-        screen = 0;
+        screen = 1;
         
         orderList = new ArrayList<>();
         String path = System.getProperty("user.dir");
         System.out.println(path + "\\TESTING.txt");
-        File file = new File(path + "\\TESTING.txt");   
+        File file = new File(path + "\\TESTING.txt"); 
+        ArrayList<String> inputList = new ArrayList<String>();
         try{
             Scanner sc = new Scanner(file);
             if (file.exists() && sc.hasNextLine())
             {
                 while (sc.hasNextLine())
                 {
-                    String name = sc.nextLine();
-                    int orderID = Integer.parseInt(sc.nextLine()); 
-                    ArrayList<Pizza> pizzaList = new ArrayList<>();
-                    boolean end = false;
-                    while(end == false)
+                    inputList.add(sc.nextLine());  
+                }
+            }        
+        }
+        catch (FileNotFoundException ex)       
+        {
+            System.out.println("File not found");
+        }
+        int k = 0;
+        int max = inputList.size();
+        while(k < max)
+        {
+            String name = inputList.get(k);
+            int orderID = Integer.parseInt(inputList.get(k+1));
+            ArrayList<Pizza> pizzaList = new ArrayList<>();
+            boolean end = false;
+            k = k + 2;
+            while(end == false)
                     {
                         int size = 0;
                         int type = 0;
@@ -66,65 +78,55 @@ public class Main extends Application
                         for(int i = 0; i < 6; i++)
                         {
                             if(i == 0){
-                                String input = sc.nextLine();
+                                String input = inputList.get(k);
                                 if(input.equals("@"))
                                 {
                                     end = true;
+                                    k++;
                                     break;
                                 }
                                 size = Integer.parseInt(input);
+                                k++;
                             }
-                            if(i == 1)
-                                type = Integer.parseInt(sc.nextLine());
+                            if(i == 1){
+                                type = Integer.parseInt(inputList.get(k));
+                                k++;
+                            }
                             if(i == 2)
                             {
-                                mush = Integer.parseInt(sc.nextLine());
+                                mush = Integer.parseInt(inputList.get(k));
                                 if(mush == 1)
                                     temp[0] = true;
+                                k++;
                             }
                             if(i == 3)
                             {
-                                olive = Integer.parseInt(sc.nextLine());
+                                olive = Integer.parseInt(inputList.get(k));
                                 if(olive == 1)
                                     temp[1] = true;
+                                k++;
                             }
                             if(i == 4)
                             {
-                                EC = Integer.parseInt(sc.nextLine());
+                                EC = Integer.parseInt(inputList.get(k));
                                 if(EC == 1)
                                     temp[2] = true;
+                                k++;
                             }
                             if(i == 5)
                             {
-                                onion = Integer.parseInt(sc.nextLine());
+                                onion = Integer.parseInt(inputList.get(k));
                                 if(onion == 1)
                                     temp[3] = true;
+                                k++;
                             }
                         }
-                        Pizza piz = new Pizza(size, type, temp);
+                        Pizza piz = new Pizza(size, type, temp, 0);
                         if(end != true)
-                            pizzaList.add(piz);                        
-
+                            pizzaList.add(piz);                    
                     }
                     Order tempOrder = new Order(pizzaList, orderID, name);
                     orderList.add(tempOrder);
-                }
-            }
-        
-        }
-        catch (FileNotFoundException ex)       
-        {
-            System.out.println("File not found");
-        }
-        for(int k = 0; k < orderList.size(); k++)
-        {
-            System.out.println("order:" + orderList.get(k).getID() );
-            for(int d = 0; d < orderList.get(k).getPizzaList().size(); d++)
-            {
-                System.out.println("pizza" + orderList.get(k).getPizzaList().get(d).getSize());
-            
-            }  
-        
         }
         
         StackPane rootPane = new StackPane();
@@ -138,7 +140,7 @@ public class Main extends Application
         secondPane.getChildren().add(cookGUI);
         
         StackPane thirdPane = new StackPane();
-        cashierUI cashierGUI = new cashierUI();
+        cashierUI cashierGUI = new cashierUI(orderList);
         Scene scene3 = new Scene(thirdPane, 630, 540); 
         thirdPane.getChildren().add(cashierGUI);
         
@@ -218,11 +220,14 @@ public class Main extends Application
                     rootPane.getChildren().addAll(swapScreen,closeProgram);
                 }
                 else if(screen == 1){
-                    stage.setScene(scene2);
+                    StackPane secondPane = new StackPane();
+                    CookGUI cookGUI = new CookGUI(orderList);
+                    Scene scene2 = new Scene(secondPane, 630, 540);                  
                     screen = 2;
-                    secondPane.getChildren().addAll(swapScreen,closeProgram);
+                    secondPane.getChildren().addAll(cookGUI,swapScreen,closeProgram);
+                    stage.setScene(scene2);
                 }
-                else if(screen == 2){
+                else if(screen == 2){                    
                     stage.setScene(scene3);
                     screen = 0;
                     thirdPane.getChildren().addAll(swapScreen,closeProgram);
@@ -252,7 +257,5 @@ public class Main extends Application
         launch(args);
     }//end main
     //changes
-    
-    
     
 }
