@@ -253,7 +253,7 @@ public class CustomerGUI extends BorderPane{
                 Order order = new Order(pizzaList, correctID, name);
                 
                 orderList.add(order);
-                
+                pizzaList = new ArrayList<>();
                 System.out.println("the try was not cought");
             }
             catch (NumberFormatException ex){
@@ -262,7 +262,11 @@ public class CustomerGUI extends BorderPane{
             }
             
             for(int i = 0; i < orderList.size(); i++) {
-                //System.out.println(orderList().get(i).getName());
+                System.out.println(orderList.get(i).getName());
+                for(int k =0 ; k < orderList.get(i).getPizzaList().size(); k++)
+                {
+                    System.out.println(orderList.get(i).getPizzaList().get(k).getType());
+                }
             }
             //print orderList(i) see if the details are right
         }
@@ -328,7 +332,7 @@ public class CustomerGUI extends BorderPane{
             }
                             
         
-            Pizza pizza = new Pizza(pizzaType, size, toppings);
+            Pizza pizza = new Pizza(pizzaType, size, toppings, 0);
             pizzaList.add(pizza);
         }
     }
