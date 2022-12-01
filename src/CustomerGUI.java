@@ -218,6 +218,7 @@ public class CustomerGUI extends BorderPane{
         this.setCenter(vBox1);
         button1.setOnAction(new PizzaHandler());
         //button2.setOnAction(new orderCreater());
+
         
         
         button2.setOnAction(new EventHandler<ActionEvent>(){
