@@ -40,8 +40,8 @@ public class Main extends Application
         
         orderList = new ArrayList<>();
         String path = System.getProperty("user.dir");
-        System.out.println(path + "\\TESTING.txt");
-        File file = new File(path + "\\TESTING.txt"); 
+        System.out.println(path + "\\OrderListData.txt");
+        File file = new File(path + "\\OrderListData.txt"); 
         ArrayList<String> inputList = new ArrayList<String>();
         try{
             Scanner sc = new Scanner(file);
@@ -131,22 +131,22 @@ public class Main extends Application
         
         StackPane rootPane = new StackPane();
         CustomerGUI gui = new CustomerGUI(orderList);
-        Scene scene = new Scene(rootPane, 630, 540);
+        Scene scene = new Scene(rootPane, 650, 560);
         rootPane.getChildren().add(gui);
         
         StackPane secondPane = new StackPane();
         CookGUI cookGUI = new CookGUI(orderList);
-        Scene scene2 = new Scene(secondPane, 630, 540); 
+        Scene scene2 = new Scene(secondPane, 650, 560); 
         secondPane.getChildren().add(cookGUI);
         
         StackPane thirdPane = new StackPane();
         cashierUI cashierGUI = new cashierUI(orderList);
-        Scene scene3 = new Scene(thirdPane, 630, 540); 
+        Scene scene3 = new Scene(thirdPane, 650, 560); 
         thirdPane.getChildren().add(cashierGUI);
         
         //StackPane fourthPane = new StackPane();
         //LoginGUI loginGUI = new LoginGUI();
-        //Scene scene4 = new Scene(thirdPane, 630, 540); 
+        //Scene scene4 = new Scene(thirdPane, 650, 560); 
         //thirdPane.getChildren().add(loginGUI);
         
         closeProgram = new Button("Close Program");   
@@ -155,13 +155,13 @@ public class Main extends Application
             public void handle(ActionEvent event)
             {
             try {
-              File myObj = new File("TESTING.txt");
+              File myObj = new File("OrderListData.txt");
               if (myObj.createNewFile()) {
                 System.out.println("File created: " + myObj.getName());
               } else {
                 System.out.println("File already exists.");
               }
-              FileWriter myWriter = new FileWriter("TESTING.txt");
+              FileWriter myWriter = new FileWriter("OrderListData.txt");
               for(int i = 0; i < orderList.size(); i++)
               {
                 Order ord = orderList.get(i);
@@ -222,15 +222,18 @@ public class Main extends Application
                 else if(screen == 1){
                     StackPane secondPane = new StackPane();
                     CookGUI cookGUI = new CookGUI(orderList);
-                    Scene scene2 = new Scene(secondPane, 630, 540);                  
+                    Scene scene2 = new Scene(secondPane, 650, 560);                  
                     screen = 2;
                     secondPane.getChildren().addAll(cookGUI,swapScreen,closeProgram);
                     stage.setScene(scene2);
                 }
                 else if(screen == 2){                    
-                    stage.setScene(scene3);
+                    StackPane thirdPane = new StackPane();
+                    cashierUI cashierGUI = new cashierUI(orderList);
+                    Scene scene3 = new Scene(thirdPane, 650, 560);                    
                     screen = 0;
-                    thirdPane.getChildren().addAll(swapScreen,closeProgram);
+                    thirdPane.getChildren().addAll(cashierGUI,swapScreen,closeProgram);
+                    stage.setScene(scene3);
                 }
                 //else if(screen == 3) {
                 //    stage.setScene(scene4);
