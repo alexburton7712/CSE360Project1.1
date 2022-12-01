@@ -26,6 +26,10 @@ public class CookGUI extends BorderPane{
         pizzaList = new ArrayList<>();
         
         title = new Label("Order");
+        if(orderList.size() == 0)
+        {
+            title = new Label("NO CURRENT ORDERS for the COOK");
+        }
         outer.getChildren().addAll(title);
         
         for(int i = 0; i < orderList.size(); i++)
@@ -34,7 +38,7 @@ public class CookGUI extends BorderPane{
             for(int j = 0; j < tempOrder.getPizzaList().size(); j++)
             {
                 Pizza tempPizza = tempOrder.getPizzaList().get(j);
-                if(tempPizza.getState() != 3){
+                //if(tempPizza.getState() != 3){
                 
                     Button state = new Button("State: " + tempPizza.getState() + " Change State");
                     VBox cookOrder = new VBox();
@@ -94,45 +98,31 @@ public class CookGUI extends BorderPane{
                             else if(tempPizza.getState() == 2)
                             {
                                 tempPizza.setState(3);
+                                cookOrder.setStyle("-fx-background-color: #008000;");
                             }
                             state.setText("State: " + tempPizza.getState() + " Change State");
-                            cookOrder.setStyle("-fx-background-color: #FFFFFF;");
-                            if(tempPizza.getState() == 3)
-                            {
-                                cookOrder.setOpacity(0);
-                                for(int k = 0; k < orderList.size(); k++)
-                                {
-                                    if(orderList.get(k).getPizzaList().size() == 0)
-                                    {
-                                        orderList.remove(k);
-                                    }
-                                    for(int l = 0; l < orderList.get(k).getPizzaList().size();l++)
-                                    {
-                                        if(orderList.get(k).getPizzaList().get(l) == tempPizza)
-                                        {
-                                            orderList.get(k).getPizzaList().remove(l);
-                                        }
-                                    }
-                                }
-                            }
                         }
                     });
                     
                     cookOrder.getChildren().addAll(orderName,state);
                     outer.getChildren().addAll(cookOrder);
                     cookOrder.setStyle("-fx-border-color: black");
-                    Insets inset = new Insets(25);
+                    if(tempPizza.getState() == 3)
+                    {
+                        cookOrder.setStyle("-fx-background-color: #008000;");
+                    }
+                    Insets inset = new Insets(20);
                     cookOrder.setPadding(inset);                
-                    cookOrder.setMargin(outer, new Insets(0, 0, 0, 8));
+                    cookOrder.setMargin(outer, new Insets(0, 0, 0, 4));
                     
-                }
+                //}
             }
         }       
         
         
-        Insets inset = new Insets(25);
+        Insets inset = new Insets(20);
         outer.setPadding(inset);                
-        outer.setMargin(outer, new Insets(0, 0, 0, 8));
+        outer.setMargin(outer, new Insets(0, 0, 0, 4));
         
         this.setCenter(outer);
     }
