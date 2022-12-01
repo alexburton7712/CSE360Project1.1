@@ -38,17 +38,66 @@ public class cashierUI extends BorderPane{
     ImageView pizzaWindow;
     
     
-    
     public cashierUI(ArrayList<Order> orderList) {
         VBox container = new VBox();
+        
+        if(orderList.size() == 0)
+        {
+            Label empty = new Label("NO CURRENT ORDERS for the Cashier");    
+            container.getChildren().add(empty);
+        }
         
         for(int i = 0; i < orderList.size(); i++)
         {
             VBox order = new VBox();
+            boolean done = true;
+            for(int j = 0; j < orderList.get(i).getPizzaList().size(); j++)
+            {
+                if(orderList.get(i).getPizzaList().get(j).getState() != 3)
+                {
+                    done = false;
+                }
+
+            }
+            if(done == true)
+            {
+                Label Ready = new Label("ORDER READY TO BE COMPLETED");
+                order.getChildren().add(Ready);
+            }
+            
             String name = orderList.get(i).getName();
             int orderID = orderList.get(i).getID();
             Label title = new Label("Name: " + name + " OrderID: " + orderID );
-            order.getChildren().add(title);
+            Button complete = new Button("Complete Order");
+            complete.setOnAction(new EventHandler<ActionEvent>(){
+                public void handle(ActionEvent event)
+                {
+                    boolean done = true;
+                    for(int i = 0; i < orderList.size(); i++)
+                    {
+                        for(int j = 0; j < orderList.get(i).getPizzaList().size(); j++)
+                        {
+                            if(orderList.get(i).getPizzaList().get(j).getState() != 3)
+                            {
+                                done = false;
+                            }
+                        }
+                        if(done == true)
+                        {
+                            orderList.remove(i);
+                            order.setOpacity(0);
+                            if(orderList.size() == 0)
+                            {
+                                Label empty = new Label("NO CURRENT ORDERS");
+                                container.getChildren().add(empty);
+                            }   
+                        }
+                        done = true;
+                    }
+                }
+            });
+            
+            order.getChildren().addAll(title);
             for(int j = 0; j < orderList.get(i).getPizzaList().size(); j++)
             {
                 VBox pizza = new VBox();
@@ -93,22 +142,31 @@ public class cashierUI extends BorderPane{
                 }
                     
                 Label pizzaLabel = new Label("Pizza"+"\nSize: " + size +"   Type: " + type + "\nMushrooms: " +  Mush + "        Onions: " + Onions + "      Olives: " + Olives + "      Extra Cheese: " +
-                Extra );
+                Extra );              
                 
                 pizza.getChildren().addAll(pizzaLabel);
                 order.getChildren().addAll(pizza);
                 pizza.setStyle("-fx-border-color: black");
-                Insets inset = new Insets(25);
+                Insets inset = new Insets(20);
                 pizza.setPadding(inset);                
-                pizza.setMargin(container, new Insets(0, 0, 0, 8));
+                pizza.setMargin(container, new Insets(0, 0, 0, 4));
             }
+            order.getChildren().addAll(complete);
             container.getChildren().addAll(order);
             order.setStyle("-fx-border-color: black");
-            Insets inset = new Insets(25);
+            if(done == true)
+            {
+                order.setStyle("-fx-background-color: #008000;");
+            }
+            if(done == false)
+            {
+                order.setStyle("-fx-background-color: #ff0000;");
+            }
+            Insets inset = new Insets(20);
             order.setPadding(inset);                
-            order.setMargin(container, new Insets(0, 0, 0, 8));
+            order.setMargin(container, new Insets(0, 0, 0, 4));
         }
-        Insets inset = new Insets(25);
+        Insets inset = new Insets(20);
         container.setPadding(inset);                
         container.setMargin(container, new Insets(0, 0, 0, 8));
         
